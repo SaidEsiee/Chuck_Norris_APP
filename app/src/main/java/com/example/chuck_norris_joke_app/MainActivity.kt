@@ -20,6 +20,6 @@ class MainActivity : AppCompatActivity() {
             "Chuck Norris once won an arm wrestling match,with both hands tied behind his back",
             "Chuck Norris can connect parallel lines",
             "Unlike Santa Claus, Chuck Norris doesn't need to check his list twice.",
-            "Chuck Norris can login without signing up, on any website.")
+            "Chuck Norris can login without signing up, on any websitej.")
     }
 }
