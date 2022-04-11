@@ -3,12 +3,17 @@ package com.example.chuck_norris_joke_app
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Log.d("List_of_jokes",List_of_jokes.toString())
+
+        val recyclerview = findViewById<RecyclerView>(R.id.rvContacts)
+
+        recyclerview.adapter = JokeAdapter()
     }
     object List_of_jokes {
         val jokes_list = listOf<String>("The Pope once tried to bless Chuck Norris. Nobody crosses Chuck Norris.",
