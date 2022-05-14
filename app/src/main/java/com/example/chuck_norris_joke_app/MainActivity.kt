@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
+import io.reactivex.Single
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import kotlinx.serialization.*
+import io.reactivex.disposables.CompositeDisposable
 
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +21,12 @@ class MainActivity : AppCompatActivity() {
 
         recyclerview.adapter = JokeAdapter()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        CompositeDisposable.clear()
+    }
+
     object List_of_jokes {
         val jokes_list = listOf<String>("The Pope once tried to bless Chuck Norris. Nobody crosses Chuck Norris.",
             "Chuck Norris uses a flamethrower to light his BBQ.",
@@ -29,4 +39,17 @@ class MainActivity : AppCompatActivity() {
             "Unlike Santa Claus, Chuck Norris doesn't need to check his list twice.",
             "Chuck Norris can login without signing up, on any website.")
     }
+
+    val jokeService : JokeApiService = JokeApiServiceFactory.builderApi()
+
+    val CompositeDisposable = CompositeDisposable()
+
+    fun getJoke() {
+        jokeService.giveMeAJoke().subscribeOn(Schedulers.io()).subscribeBy(
+            onError = { println("an error has appeared") },
+            onSuccess = { println(it.value) }
+        ).also{CompositeDisposable.add(it)}
+    }
+
 }
+
