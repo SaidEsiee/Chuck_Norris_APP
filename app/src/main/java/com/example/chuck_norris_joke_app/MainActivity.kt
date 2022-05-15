@@ -28,8 +28,7 @@ class MainActivity : AppCompatActivity() {
         recyclerview.adapter = adapter
 
         getJoke()
-        val buttonJoke = findViewById<Button>(R.id.id_button)
-        buttonJoke.setOnClickListener{getJoke()}
+ 
     }
 
     override fun onDestroy() {
