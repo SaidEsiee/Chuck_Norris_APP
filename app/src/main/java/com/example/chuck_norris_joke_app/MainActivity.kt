@@ -59,12 +59,13 @@ class MainActivity : AppCompatActivity() {
     private fun getJoke() {
         val progressBar = findViewById<ProgressBar>(R.id.id_progress_bar)
         progressBar.visibility = View.VISIBLE
-        jokeService.giveMeAJoke().delay(5000, TimeUnit.MILLISECONDS).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeBy(
+        jokeService.giveMeAJoke().repeat(10).delay(5000, TimeUnit.MILLISECONDS).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeBy(
             onError = { Log.d("error", "an error has appeared")
                 progressBar.visibility = View.INVISIBLE },
-            onSuccess = { Log.d("success", "${it.value}")
+            onNext = { Log.d("success", "${it.value}")
                 progressBar.visibility = View.INVISIBLE
-                adapter.addAJoke(it)
+                adapter.addAJoke(it)},
+            onComplete = { Log.d("It's complete", "All jokes are displayed" )
             }
         ).also { CompositeDisposable.add(it) }
     }
