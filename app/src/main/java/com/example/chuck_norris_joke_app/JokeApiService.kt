@@ -9,7 +9,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.http.GET
 
 interface JokeApiService {
-    @GET("https://api.chucknorris.io/")
+    @GET("jokes/random")
     fun giveMeAJoke(): Single<Joke>
 }
 

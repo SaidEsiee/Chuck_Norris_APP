@@ -31,8 +31,8 @@ class JokeAdapter : RecyclerView.Adapter<JokeAdapter.JokeViewHolder>(){
     var listAdapterJokes = listOf<Joke>()
 
     fun addAJoke(joke : Joke) {
-        listAdapterJokes += joke
-        notifyDataSetChanged();
+        listAdapterJokes = listAdapterJokes + joke
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JokeViewHolder {
