@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.serialization.*
@@ -47,7 +48,7 @@ class MainActivity : AppCompatActivity() {
     val CompositeDisposable = CompositeDisposable()
 
     fun getJoke() {
-        jokeService.giveMeAJoke().subscribeOn(Schedulers.io()).subscribeBy(
+        jokeService.giveMeAJoke().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeBy(
             onError = { Log.d("error","an error has appeared") },
             onSuccess = {Log.d("success","${it.value}")
                 }
