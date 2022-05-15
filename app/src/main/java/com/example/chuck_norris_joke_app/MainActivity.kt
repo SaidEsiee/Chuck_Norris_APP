@@ -15,6 +15,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        Log.d("List_of_jokes",List_of_jokes.toString())
+
         val recyclerview = findViewById<RecyclerView>(R.id.rvContacts)
 
         recyclerview.adapter = JokeAdapter()
