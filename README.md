@@ -113,7 +113,7 @@ Part 3 - Display jokes on screen
 
 
 --------------------------
-1.Display a single Joke
+1. Display a single Joke
 --------------------------
 
 Dans cette partie, nous abandonnons notre liste de blagues préalablement écrites car nous allons nous servir de celles
@@ -127,7 +127,7 @@ d'ajouter et de stocker les blagues dans une liste, et également créer une val
 configurer le bouton et qu'il appelle une blague à chaque click du bouton.
 
 --------------------------
-2.Add a loader
+2. Add a loader
 --------------------------
 
 Dans cette partie, le but est de créer une barre de chargement pour indiquer à l'utilisateur de patienter durant
@@ -140,7 +140,7 @@ J'ai également appelé la fonction delay() à la fonction getJoke() pour qu'on 
 car en effet l'appel pour une seule blague peut être trop rapide pour pouvoir observer la barre de chargement.
 
 --------------------------
-3.Make the call for multiple joke with Observable
+3. Make the call for multiple joke with Observable
 --------------------------
 
 Dans cette partie, j'ai simplement utilisé la fonction repeat() pour afficher 10 blagues au lieu d'une, et modifier 
@@ -148,7 +148,7 @@ la fonction getJoke(), en séparant la fonction onSuccess() en onNext() et onCom
 maintenant défini par l'appel de 10 blagues au lieu d'une.
 
 --------------------------
-4.Reload new jokes
+4. Reload new jokes
 --------------------------
 
 Maintenant, je supprime le bouton car on cherche à afficher les blagues suivantes en défilant l'application.
