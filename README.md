@@ -53,7 +53,7 @@ ce qui était le cas pour moi ( après quelques corrections suite à des erreurs
 Et pour finir nous avons modifier, toutes les String par des Joke.
 
 --------------------------
-2.Import Retrofit & Rx Java
+2. Import Retrofit & Rx Java
 --------------------------
 
 Dans cette partie, j'ai seulement effectuer les imports des dernières version de Retrofit et Rx Java et également 
