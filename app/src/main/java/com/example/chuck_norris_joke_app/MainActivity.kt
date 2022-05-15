@@ -15,11 +15,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Log.d("List_of_jokes",List_of_jokes.toString())
-
         val recyclerview = findViewById<RecyclerView>(R.id.rvContacts)
 
         recyclerview.adapter = JokeAdapter()
+
+        getJoke()
     }
 
     override fun onDestroy() {
@@ -46,8 +46,9 @@ class MainActivity : AppCompatActivity() {
 
     fun getJoke() {
         jokeService.giveMeAJoke().subscribeOn(Schedulers.io()).subscribeBy(
-            onError = { println("an error has appeared") },
-            onSuccess = { println(it.value) }
+            onError = { Log.d("error","an error has appeared") },
+            onSuccess = {Log.d("success","${it.value}")
+                }
         ).also{CompositeDisposable.add(it)}
     }
 

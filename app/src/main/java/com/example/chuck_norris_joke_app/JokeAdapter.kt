@@ -1,5 +1,6 @@
 package com.example.chuck_norris_joke_app
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,7 +25,7 @@ class JokeAdapter : RecyclerView.Adapter<JokeAdapter.JokeViewHolder>(){
         "Unlike Santa Claus, Chuck Norris doesn't need to check his list twice.",
         "Chuck Norris can login without signing up, on any website.")
 
-    var map_jokes = list_jokes.map {Joke()}
+    var map_jokes = list_jokes.map {Joke(value=it)}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JokeViewHolder {
         val view: ConstraintLayout = LayoutInflater.from(parent.context).inflate(R.layout.joke_layout,parent, false) as ConstraintLayout
@@ -34,12 +35,14 @@ class JokeAdapter : RecyclerView.Adapter<JokeAdapter.JokeViewHolder>(){
 
     override fun onBindViewHolder(holder: JokeViewHolder, position: Int) {
         val joke = map_jokes[position]
-        holder.textView.text = joke.toString()
+        holder.textView.text = joke.value
     }
 
     override fun getItemCount(): Int {
         return map_jokes.size
     }
+
+
 }
 
 
