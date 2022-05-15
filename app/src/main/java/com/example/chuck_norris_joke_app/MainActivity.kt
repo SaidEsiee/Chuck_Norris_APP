@@ -3,7 +3,9 @@ package com.example.chuck_norris_joke_app
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -11,6 +13,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.serialization.*
 import io.reactivex.disposables.CompositeDisposable
+import java.util.concurrent.TimeUnit
 
 
 class MainActivity : AppCompatActivity() {
@@ -54,10 +57,13 @@ class MainActivity : AppCompatActivity() {
     val adapter = JokeAdapter()
 
     private fun getJoke() {
-        jokeService.giveMeAJoke().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeBy(
-            onError = { Log.d("error", "an error has appeared") },
-            onSuccess = {
-                Log.d("success", "${it.value}")
+        val progressBar = findViewById<ProgressBar>(R.id.id_progress_bar)
+        progressBar.visibility = View.VISIBLE
+        jokeService.giveMeAJoke().delay(5000, TimeUnit.MILLISECONDS).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeBy(
+            onError = { Log.d("error", "an error has appeared")
+                progressBar.visibility = View.INVISIBLE },
+            onSuccess = { Log.d("success", "${it.value}")
+                progressBar.visibility = View.INVISIBLE
                 adapter.addAJoke(it)
             }
         ).also { CompositeDisposable.add(it) }
