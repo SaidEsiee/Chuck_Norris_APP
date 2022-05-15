@@ -1,18 +1,15 @@
 package com.example.chuck_norris_joke_app
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kotlinx.serialization.*
-import io.reactivex.disposables.CompositeDisposable
 import java.util.concurrent.TimeUnit
 
 
@@ -28,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         recyclerview.adapter = adapter
 
         getJoke()
- 
+
     }
 
     override fun onDestroy() {
@@ -53,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
     val CompositeDisposable = CompositeDisposable()
 
-    val adapter = JokeAdapter()
+    val adapter = JokeAdapter(onBottomReached = { getJoke() })
 
     private fun getJoke() {
         val progressBar = findViewById<ProgressBar>(R.id.id_progress_bar)
@@ -68,6 +65,7 @@ class MainActivity : AppCompatActivity() {
             }
         ).also { CompositeDisposable.add(it) }
     }
+
 }
 
 

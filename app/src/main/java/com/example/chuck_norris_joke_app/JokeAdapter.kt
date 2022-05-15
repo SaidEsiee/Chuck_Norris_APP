@@ -4,12 +4,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chuck_norris_joke_app.JokeAdapter
 
-class JokeAdapter : RecyclerView.Adapter<JokeAdapter.JokeViewHolder>(){
+class JokeAdapter (val onBottomReached : () -> Unit) : RecyclerView.Adapter<JokeAdapter.JokeViewHolder>(){
 
     class JokeViewHolder(val constraintLayout: ConstraintLayout) : RecyclerView.ViewHolder(constraintLayout){
         val textView : TextView = constraintLayout.findViewById<TextView>(R.id.jokes)
@@ -44,11 +45,16 @@ class JokeAdapter : RecyclerView.Adapter<JokeAdapter.JokeViewHolder>(){
     override fun onBindViewHolder(holder: JokeViewHolder, position: Int) {
         val joke = listAdapterJokes[position]
         holder.textView.text = joke.value
+        if (position > 8 && position == listAdapterJokes.size - 1 ) {
+            onBottomReached()
+        }
     }
 
     override fun getItemCount(): Int {
         return listAdapterJokes.size
     }
+
+
 }
 
 
